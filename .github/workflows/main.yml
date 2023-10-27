@@ -22,7 +22,7 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: test1
-        CUSTOM_MESSAGE: '{"text": "User ${{ github.actor }} triggered the workflow at ${{ github.event.created_at }} with event: ${{ github.event_name }}\n\nCommit Message:\n\n$(echo ${{ steps.commit_details.outputs.message }})\n\n[View Commit Diff](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"}'
+        CUSTOM_MESSAGE: '{User ${{ github.actor }} triggered the workflow at ${{ github.event.created_at }} with event: ${{ github.event_name }}\n\nCommit Message: ${{ steps.commit_details.outputs.message }}\n\nView Commit Diff: (${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})\n\n'
       run: |
         curl -X POST -H 'Content-type: application/json' \
         --data "{'text': '${CUSTOM_MESSAGE} Workflow completed!'}" \
