@@ -16,23 +16,13 @@ jobs:
     - name: Get Commit Details
       id: commit_details
       run: echo "::set-output name=message::Commit Message:$(git log -1 --pretty=format:'%s%n%n%b')"
-
-    - name: Get Event Time
-      id: event_time
-      run: echo "::set-output name=time::${{ github.event.repository.updated_at }}"
-
-    - name: Format Updated Time
-      run: |
-         formatted_time=$(date -d "${{ steps.updated_at_time.outputs.time }}" --utc "+%Y-%m-%d %H:%M:%S")
-         echo "::set-output name=formatted_time::$formatted_time"
-      id: formatted_time
-    
+       
     - name: Slack Notification
       
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: test1
-        CUSTOM_MESSAGE: 'User @${{ github.actor }} triggered the workflow at ${{ steps.formatted_time.outputs.formatted_time }} with event: ${{ github.event_name }}\n\n ${{ steps.commit_details.outputs.message }}\n\nView Commit Diff: (${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})\n\n'
+        CUSTOM_MESSAGE: 'User @${{ github.actor }} triggered the workflow at ${{ github.event.repository.updated_at }} with event: ${{ github.event_name }}\n\n ${{ steps.commit_details.outputs.message }}\n\nView Commit Diff: (${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})\n\n'
       run: |
         curl -X POST -H 'Content-type: application/json' \
         --data "{'text': '${CUSTOM_MESSAGE} Workflow completed!'}" \
