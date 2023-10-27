@@ -18,12 +18,12 @@ jobs:
       run: echo "::set-output name=message::Commit Message:$(git log -1 --pretty=format:'%s%n%n%b')"
     
     - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
+      uses: actions/action-slack-notify@v2
       with:
         args: '{"text": "User ${{ github.actor }} triggered the workflow at ${{ github.event.created_at }} with event: ${{ github.event_name }}\n\nCommit Message:\n\n$(echo ${{ steps.commit_details.outputs.message }})\n\n[View Commit Diff](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"}'
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: test1
-
+      
         
 
