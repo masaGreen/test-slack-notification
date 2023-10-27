@@ -24,6 +24,6 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: test-notification
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
         
 
