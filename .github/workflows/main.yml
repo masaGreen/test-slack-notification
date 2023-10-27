@@ -23,7 +23,7 @@ jobs:
         args: '{"text": "User ${{ github.actor }} triggered the workflow at ${{ github.event.created_at }} with event: ${{ github.event_name }}\n\nCommit Message:\n\n$(echo ${{ steps.commit_details.outputs.message }})\n\n[View Commit Diff](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"}'
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_CHANNEL: test-notification
+        SLACK_CHANNEL: test1
 
         
 
