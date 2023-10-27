@@ -19,7 +19,7 @@ jobs:
 
     - name: Get Event Time
       id: event_time
-      run: eecho "::set-output name=time::${{ github.event.repository.updated_at }}"
+      run: echo "::set-output name=time::${{ github.event.repository.updated_at }}"
 
     - name: Format Updated Time
       run: |
